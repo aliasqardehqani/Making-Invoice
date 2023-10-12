@@ -22,6 +22,7 @@ class Invoice(models.Model):
     ]
 
     title = models.CharField(null=True, blank=True, max_length=100)
+    logo = models.ImageField(default='LOGO.jpg', upload_to='company_logos')
     number = models.CharField(null=True, blank=True, max_length=100)
     dueDate = models.DateField(null=True, blank=True)
     paymentTerms = models.CharField(choices=TERMS, default='14 days', max_length=100)
@@ -58,15 +59,14 @@ class Invoice(models.Model):
 
 class Product(models.Model):
     CURRENCY = [
-    ('R', 'ZAR'),
-    ('$', 'USD'),
+    ('ریال', 'ریال'),
     ]
 
     title = models.CharField(null=True, blank=True, max_length=100)
     description = models.TextField(null=True, blank=True)
     quantity = models.FloatField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
-    currency = models.CharField(choices=CURRENCY, default='R', max_length=100)
+    currency = models.CharField(choices=CURRENCY, default='ریال', max_length=100)
 
     #Related Fields
     invoice = models.ForeignKey(Invoice, blank=True, null=True, on_delete=models.CASCADE)
